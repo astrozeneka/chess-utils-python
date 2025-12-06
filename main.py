@@ -1,4 +1,5 @@
 from stockfish import Stockfish
+import chess
 
 if __name__ == '__main__':
     # Claude, find
@@ -13,5 +14,9 @@ if __name__ == '__main__':
 
     # Set a position using FEN
     stockfish.set_fen_position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+
+    # Print to unicode
+    board = chess.Board(stockfish.get_fen_position())
+    print(board.unicode())
 
     print()
