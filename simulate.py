@@ -2,6 +2,11 @@ from stockfish import Stockfish
 import chess
 import random
 import numpy as np
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 def softmax_selection(top_moves, temperature=0.5):
@@ -18,10 +23,12 @@ def softmax_selection(top_moves, temperature=0.5):
 
 
 if __name__ == '__main__':
-    # Claude, find
-    stockfish_black = Stockfish(path="/opt/homebrew/bin/stockfish") # or "stockfish" if it's in PATH
+    # Get stockfish path from environment variable
+    stockfish_path = os.getenv('STOCKFISH_PATH', 'stockfish')
+
+    stockfish_black = Stockfish(path=stockfish_path)
     stockfish_black.set_elo_rating(1200)
-    stockfish_white = Stockfish(path="/opt/homebrew/bin/stockfish") # or "stockfish" if it's in PATH
+    stockfish_white = Stockfish(path=stockfish_path)
     stockfish_white.set_elo_rating(1100)
 
     for s in [stockfish_black, stockfish_white]:
